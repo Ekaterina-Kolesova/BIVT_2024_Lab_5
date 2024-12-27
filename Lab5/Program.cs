@@ -814,29 +814,25 @@ public class Program
         FindRowMaxIndex(matrix, row, out column);
         matrix[row, column] *= column + 1;
     }
+    public void MatrixTransform(ref int[,] matrix)
+    {
+        for (int k = 1; k < matrix.GetLength(0); k += 2)
+        {
+            ReplaceMaxElementOdd(ref matrix, k);
+        }
+        for (int k = 0; k < matrix.GetLength(0); k += 2)
+        {
+            ReplaceMaxElementEven(ref matrix, k);
+        }
+    }
     public void Task_2_27(int[,] A, int[,] B)
     {
         // code here
         // create and use FindRowMaxIndex(matrix, rowIndex, out columnIndex);
         // create and use ReplaceMaxElementOdd(matrix, row, column);
         // create and use ReplaceMaxElementEven(matrix, row, column);
-        for (int k = 1; k < A.GetLength(0); k += 2)
-        {
-            ReplaceMaxElementOdd(ref A, k);
-        }
-        for (int k = 0; k < A.GetLength(0); k += 2)
-        {
-            ReplaceMaxElementEven(ref A, k);
-        }
-        for (int k = 1; k < B.GetLength(0); k += 2)
-        {
-            ReplaceMaxElementOdd(ref B, k);
-        }
-        for (int k = 0; k < B.GetLength(0); k += 2)
-        {
-            ReplaceMaxElementEven(ref B, k);
-        }
-
+        MatrixTransform(ref A);
+        MatrixTransform(ref B);
         // end
     }
 
