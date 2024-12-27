@@ -690,8 +690,14 @@ public class Program
             for (int m = 0; m < matrix.GetLength(0); m++)
             {
                 for (int n = 0; n < matrix.GetLength(1); n++)
-                {
-                    if (matrix[m, n] > maxElements[k, 0] && (k == 0 || matrix[m, n] < maxElements[k - 1, 0]))
+                {//!!!
+                    if (matrix[m, n] > maxElements[k, 0] && ((k == 0 || matrix[m, n] < maxElements[k - 1, 0])))
+                    {
+                        maxElements[k, 0] = matrix[m, n];
+                        maxElements[k, 1] = m;
+                        maxElements[k, 2] = n;
+                    }
+                    if ((k != 0 && matrix[m, n] == maxElements[k - 1, 0] && m != maxElements[k - 1, 1] && n != maxElements[k, 2]))
                     {
                         maxElements[k, 0] = matrix[m, n];
                         maxElements[k, 1] = m;
@@ -720,7 +726,7 @@ public class Program
         }
 
     }
-    public void Task_2_23(double[,] A, double[,] B)// !!!
+    public void Task_2_23(double[,] A, double[,] B)
     {
         // code here
 
@@ -877,7 +883,7 @@ public class Program
         return a * MyFactorial(a - 1);
     }
     public delegate double FindElement(double x, int i);
-    //public delegate double SumFunction(double x, FindElement Element);
+    public delegate double SumFunction(double x, FindElement Element);
     public double Element1(double x, int i)
     {
         if (i == 0)
@@ -902,9 +908,15 @@ public class Program
     public double Sum(double x, FindElement Element)
     {
         double sum = 0;
+        /*if (Element == Element1)
+            sum = 1;
+        else if (Element == Element2)
+            sum = 0;
+        else
+            return 0;*/
         int i = 0;
         double current = Element(x, 0);
-        while (Math.Abs(current) > 0.0001 || i == 0 )
+        while (Math.Abs(current) > 0.0001 || i == 0)
         {
             sum += current;
             i++;
@@ -928,7 +940,7 @@ public class Program
         int numRes = (int)((b - a) / h + 1);
         double[,] result= new double[numRes, 2];
         int m = 0;
-        for (double x = a ; x <= b && m < numRes ; x+=h, m++)
+        for (double x = a ; x < b+0.0001 && m < numRes ; x+=h, m++)
         {
             result[m, 0] = Sum(x, findElem);
             result[m,1] = yFunction(x);
