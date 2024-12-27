@@ -697,7 +697,7 @@ public class Program
                         maxElements[k, 1] = m;
                         maxElements[k, 2] = n;
                     }
-                    if ((k != 0 && matrix[m, n] == maxElements[k - 1, 0] && m != maxElements[k - 1, 1] && n != maxElements[k, 2]))
+                    else if ((k != 0 && matrix[m, n] == maxElements[k - 1, 0] && !( m == maxElements[k - 1, 1] && n == maxElements[k-1, 2])))
                     {
                         maxElements[k, 0] = matrix[m, n];
                         maxElements[k, 1] = m;
@@ -729,7 +729,6 @@ public class Program
     public void Task_2_23(double[,] A, double[,] B)
     {
         // code here
-
         // create and use MatrixValuesChange(matrix);
         MatrixValuesChange(ref A);
         MatrixValuesChange(ref B);
@@ -908,12 +907,6 @@ public class Program
     public double Sum(double x, FindElement Element)
     {
         double sum = 0;
-        /*if (Element == Element1)
-            sum = 1;
-        else if (Element == Element2)
-            sum = 0;
-        else
-            return 0;*/
         int i = 0;
         double current = Element(x, 0);
         while (Math.Abs(current) > 0.0001 || i == 0)
@@ -947,7 +940,7 @@ public class Program
         }
         return result;
     }
-    public void Task_3_1(ref double[,] firstSumAndY, ref double[,] secondSumAndY)//!!!
+    public void Task_3_1(ref double[,] firstSumAndY, ref double[,] secondSumAndY)
     {
         // code here
         // create and use public delegate SumFunction(x) and public delegate YFunction(x)
@@ -955,7 +948,6 @@ public class Program
         // create and use 2 methods for both functions calculating at specific x
         firstSumAndY = GetSumAndY(Element1, Y1, 0.1, 1, 0.1);
         secondSumAndY = GetSumAndY(Element2, Y2, Math.PI / 5, Math.PI, Math.PI / 25);
-        //ошибка при x = Pi/25 
         // end
     }
 
